@@ -27,7 +27,7 @@ func main() {
 	flag.Parse()
 
 	opts := providerserver.ServeOpts{
-		Address: "registry.opentofu.org/opentofu/sleep",
+		Address: "registry.opentofu.org/yottta/sleep",
 		Debug:   debug,
 	}
 

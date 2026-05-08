@@ -77,7 +77,7 @@ func (r *sleeper) Schema(_ context.Context, _ resource.SchemaRequest, resp *reso
 				Optional: true,
 				Validators: []validator.String{
 					stringvalidator.PreferWriteOnlyAttribute(path.MatchRoot("string_wo")),
-					stringvalidator.ExactlyOneOf(path.MatchRoot("string_wo")),
+					stringvalidator.ConflictsWith(path.MatchRoot("string_wo")),
 				},
 				Description: "This is an attribute that can be configured to store the information in the state",
 			},
@@ -85,7 +85,7 @@ func (r *sleeper) Schema(_ context.Context, _ resource.SchemaRequest, resp *reso
 				Optional:  true,
 				WriteOnly: true,
 				Validators: []validator.String{
-					stringvalidator.ExactlyOneOf(path.MatchRoot("string")),
+					stringvalidator.ConflictsWith(path.MatchRoot("string")),
 					stringvalidator.AlsoRequires(path.MatchRoot("string_wo_version")),
 				},
 				Description: "This is an attribute that can be configured with ephemeral values. This value will be null in the returned state",
