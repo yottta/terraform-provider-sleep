@@ -9,6 +9,8 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
 )
 
+//go:generate go run github.com/hashicorp/terraform-plugin-docs/cmd/tfplugindocs generate --provider-name sleep
+
 var (
 	// these will be set by the goreleaser configuration
 	// to appropriate values for the compiled binary.
