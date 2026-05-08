@@ -100,14 +100,16 @@ func (r *sleeper) Schema(_ context.Context, _ resource.SchemaRequest, resp *reso
 }
 
 func (r *sleeper) ModifyPlan(ctx context.Context, req resource.ModifyPlanRequest, resp *resource.ModifyPlanResponse) {
-	var config sleeperModel
+	var config *sleeperModel
 	diags := req.Config.Get(ctx, &config)
 	resp.Diagnostics.Append(diags...)
 	if resp.Diagnostics.HasError() {
 		return
 	}
 
-	r.sleeper.Sleep(ctx, config.PlanSleep)
+	if config != nil {
+		r.sleeper.Sleep(ctx, config.PlanSleep)
+	}
 }
 
 func (r *sleeper) Create(ctx context.Context, req resource.CreateRequest, resp *resource.CreateResponse) {
